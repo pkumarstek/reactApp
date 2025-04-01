@@ -51,19 +51,22 @@ jobs:
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
-        working-directory: Source/MiniProject/todo-app
+        working-directory: ./Source/MiniProject/todo-app
 
       # Step 4: Build the app
       - name: Build the app
         run: npm run build
-        working-directory: Source/MiniProject/todo-app
+        working-directory: ./Source/MiniProject/todo-app
+
+      - name: Debug build directory
+        run: ls -la ./Source/MiniProject/todo-app/build
 
       # Step 5: Upload build artifacts
       - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: build
-          path: Source/MiniProject/todo-app/build
+          path: ./Source/MiniProject/todo-app/build
 
   deploy:
     runs-on: ubuntu-latest
@@ -83,16 +86,16 @@ jobs:
       # Step 3: Install dependencies
       - name: Install dependencies
         run: npm install
-        working-directory: Source/MiniProject/todo-app
+        working-directory: ./Source/MiniProject/todo-app
 
       # Step 4: Build the app
       - name: Build the app
         run: npm run build
-        working-directory: Source/MiniProject/todo-app
+        working-directory: ./Source/MiniProject/todo-app
 
       # Step 5: Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: Source/MiniProject/todo-app/build
+          publish_dir: ./Source/MiniProject/todo-app/build
